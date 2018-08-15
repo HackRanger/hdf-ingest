@@ -3,8 +3,8 @@ setwd("C:\\workspace\\dataset1\\")
 colnames = c("datetime","machineID","comp")
 failuredata = read.table("machine_1_failures.csv",sep=",",header=FALSE,col.names=colnames)
 component_type = c("comp1","comp2","comp3","comp4")
-start <- as.POSIXlt("2015-07-01 06:00:00")
-end   <- as.POSIXlt("2015-08-30 06:00:00")
+start <- as.POSIXct("2015-07-01 06:00:00")
+end   <- as.POSIXct("2015-08-30 06:00:00")
 dates <- seq(start, end, by=86400)
 
 datetimes = c()
@@ -21,7 +21,7 @@ for ( date in dates )
   comp3 = 0
   comp4 = 0
   for(row in 1:nrow(failuredata)){
-    rowdate = as.POSIXlt(failuredata[row,"datetime"])
+    rowdate = as.POSIXct(failuredata[row,"datetime"])
     rowcomp = failuredata[row,"comp"]
     if(rowdate == date){
       if(rowcomp == "comp1"){
@@ -35,11 +35,11 @@ for ( date in dates )
       } 
     }
   }
-  datetimes = c(datetimes,date)
+  datetimes = c(datetimes,as.POSIXct(date, origin="1970-01-01"))
   comp1s = c(comp1s,comp1)
   comp2s = c(comp2s,comp2)
   comp3s = c(comp3s,comp3)
   comp4s = c(comp4s,comp4)
 }
-f = data.frame(datetimes,comp1s,comp2s,comp3s,comp4s)
-head(f)
+failureframe = data.frame(dates,comp1s,comp2s,comp3s,comp4s)
+head(failureframe)
