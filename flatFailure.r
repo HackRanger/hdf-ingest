@@ -5,7 +5,7 @@ failuredata = read.table("machine_1_failures.csv",sep=",",header=FALSE,col.names
 component_type = c("comp1","comp2","comp3","comp4")
 start <- as.POSIXct("2015-07-01 06:00:00")
 end   <- as.POSIXct("2015-08-30 06:00:00")
-dates <- seq(start, end, by=86400)
+dates <- seq(start, end, by=3600)
 
 datetimes = c()
 comp1s = c()
