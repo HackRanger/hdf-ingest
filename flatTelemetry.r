@@ -10,10 +10,10 @@ colnames(telemetryts) <- names
 start <- as.POSIXlt("2015-07-01 00:00:00")
 end   <- as.POSIXlt("2015-08-30 11:00:00")
 dates <- seq(start, end, by=3600)
-
+stamp <- start
+newdata = c()
 for(row in 1:nrow(telemetryts)){
-  as.Date(as.vector(telemetryts[row,]$dates),format="%Y-%m-%d")
-   
+    print(errfails[which(errfails$dates.failures==telemetryts[row]$dates)])
 }
 
 

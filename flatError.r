@@ -3,9 +3,9 @@ setwd("C:\\workspace\\dataset1\\")
 colnames = c("datetime","machineID","error")
 failuredata = read.table("machine_1_errors.csv",sep=",",header=FALSE,col.names=colnames)
 component_type = c("type1","type2","type3","type4","type5")
-start <- as.POSIXlt("2015-07-01 00:00:00")
-end   <- as.POSIXlt("2015-08-30 23:00:00")
-dates <- seq(start, end, by=86400)
+start <- as.POSIXct("2015-07-01 01:00:00")
+end   <- as.POSIXct("2015-08-30 23:00:00")
+dates <- seq(start, end, by=3600)
 
 datetimes = c()
 type1s = c()
@@ -14,6 +14,7 @@ type3s = c()
 type4s = c()
 type5s = c()
 
+failuredata$datetime <- as.POSIXct(as.vector(failuredata$datetime))
 
 for ( date in dates )
 {
@@ -22,10 +23,11 @@ for ( date in dates )
   type3 = 0
   type4 = 0
   type5 = 0
+  posixdate = as.POSIXct(date,origin="1970-01-01")
   for(row in 1:nrow(failuredata)){
-    rowdate = as.POSIXlt(failuredata[row,"datetime"])
+    rowdate = as.POSIXct(failuredata[row,"datetime"])
     rowcomp = failuredata[row,"error"]
-    if(rowdate == date){
+    if(rowdate == posixdate){
       if(rowcomp == "error1"){
         type1 <- type1 + 1
       }else if(rowcomp == "error2"){

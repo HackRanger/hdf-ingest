@@ -13,6 +13,7 @@ comp2s = c()
 comp3s = c()
 comp4s = c()
 
+failuredata$datetime <- as.POSIXct(as.vector(failuredata$datetime))
 
 for ( date in dates )
 {
@@ -35,7 +36,7 @@ for ( date in dates )
       } 
     }
   }
-  datetimes = c(datetimes,as.POSIXct(date, origin="1970-01-01"))
+  datetimes = c(datetimes,date)
   comp1s = c(comp1s,comp1)
   comp2s = c(comp2s,comp2)
   comp3s = c(comp3s,comp3)
