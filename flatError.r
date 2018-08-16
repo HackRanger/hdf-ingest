@@ -1,10 +1,10 @@
 library(zoo)
-setwd("C:\\workspace\\dataset1\\")
+#setwd("C:\\workspace\\dataset1\\")
 colnames = c("datetime","machineID","error")
 failuredata = read.table("machine_1_errors.csv",sep=",",header=FALSE,col.names=colnames)
 component_type = c("type1","type2","type3","type4","type5")
 start <- as.POSIXct("2015-07-01 01:00:00")
-end   <- as.POSIXct("2015-08-30 23:00:00")
+end   <- as.POSIXct("2015-08-31 23:00:00")
 dates <- seq(start, end, by=3600)
 
 datetimes = c()
